@@ -25,9 +25,19 @@ public class UsuarioController {
         return usuarioService.guardarUsuario(usuario);
     }
 
-    @GetMapping(path = "{id}")
-    public Optional<UsuarioModel> obtenerUsuario(@PathVariable Long id) {
+    @GetMapping(path = "/{id}")
+    public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
         return usuarioService.obtenerUsuario(id);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public String eliminarUsuario(@PathVariable("id") Long id) {
+        Boolean seElimino = usuarioService.eliminarUsuario(id);
+        if (seElimino) {
+            return "Se ha eliminado el usuario de id " + id;
+        } else {
+            return "No se ha podido eliminar el usuario";
+        }
     }
 
 

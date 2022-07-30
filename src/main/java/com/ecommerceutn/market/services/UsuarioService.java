@@ -26,4 +26,13 @@ public class UsuarioService {
     public Optional<UsuarioModel> obtenerUsuario(Long id) {
         return usuarioRepository.findById(id);
     }
+
+    public Boolean eliminarUsuario(Long id) {
+        try {
+            usuarioRepository.deleteById(id);
+            return true;
+        } catch(Exception error) {
+            return false;
+        }
+    }
 }

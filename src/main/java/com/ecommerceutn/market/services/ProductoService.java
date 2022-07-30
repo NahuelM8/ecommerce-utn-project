@@ -18,8 +18,26 @@ public class ProductoService {
         return (ArrayList<ProductoModel>) productoRepository.findAll();
     }
 
-    public Optional<ProductoModel> obtenerProducto(Long id) {
+    public Optional<ProductoModel> obtenerProductoPorId(Long id) {
         return productoRepository.findById(id);
+    }
+
+    public ProductoModel guardarProducto(ProductoModel producto) {
+        return productoRepository.save(producto);
+    }
+
+    public void actualizarProducto(ProductoModel producto, Long id) {
+        producto.setId(id);
+        productoRepository.save(producto);
+    }
+
+    public Boolean eliminarProducto(Long id) {
+        try {
+            productoRepository.deleteById(id);
+            return true;
+        } catch(Exception error) {
+            return false;
+        }
     }
 
 
