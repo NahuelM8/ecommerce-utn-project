@@ -14,7 +14,7 @@ public class ProductoModel {
     private String nombre;
 
     @Column(name = "cantidad_disponible", nullable = false)
-    private Integer cantidad_disponible;
+    private Integer cantidadDisponible;
 
     @Column(name = "descripcion", nullable = true)
     private String descripcion;
@@ -25,6 +25,10 @@ public class ProductoModel {
     @ManyToOne()
     @JoinColumn(name = "vendedor")
     private UsuarioModel vendedorAsociado;
+
+    @Column(name="imagen_producto")
+    private String imagenProducto;
+
 
     public ProductoModel() {
 
@@ -54,13 +58,6 @@ public class ProductoModel {
         this.nombre = nombre;
     }
 
-    public Integer getCantidad_disponible() {
-        return cantidad_disponible;
-    }
-
-    public void setCantidad_disponible(Integer cantidad_disponible) {
-        this.cantidad_disponible = cantidad_disponible;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -77,5 +74,22 @@ public class ProductoModel {
     public void setPrecio(Integer precio) {
         this.precio = precio;
     }
+
+    public Integer getCantidadDisponible() {
+        return cantidadDisponible;
+    }
+
+    public void setCantidadDisponible(Integer cantidadDisponible) {
+        this.cantidadDisponible = cantidadDisponible;
+    }
+
+    public String getImagenProducto() {
+        return imagenProducto;
+    }
+
+    public void setImagenProducto(String imagenProducto) {
+        this.imagenProducto = imagenProducto;
+    }
+
 
 }

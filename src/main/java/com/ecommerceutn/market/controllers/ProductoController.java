@@ -5,7 +5,12 @@ import com.ecommerceutn.market.models.ProductoModel;
 import com.ecommerceutn.market.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -27,7 +32,21 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ProductoModel guardarProducto(ProductoModel producto) {
+    public ProductoModel guardarProducto(ProductoModel producto, @RequestParam("archivo") MultipartFile imagen) {
+
+        if(!imagen.isEmpty()) {
+            String nombreImagen = imagen.getOriginalFilename();
+            Path rutaImagen = Paths.get("//src//main//resources//static/images").resolve(nombreImagen).toAbsolutePath();
+
+            try {
+                Files.copy(imagen.getInputStream(), rutaImagen);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            producto.setImagenProducto(nombreImagen);
+        }
+
         return productoService.guardarProducto(producto);
     }
 
